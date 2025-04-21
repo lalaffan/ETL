@@ -1,0 +1,135 @@
+{
+    "providers": {    
+        "provider": "EIA",
+        "base_url": "https://api.eia.gov/v2/electricity/retail-sales/data/",
+        "params": {
+            "frequency": "monthly",
+            "data": ["customers", "price", "revenue", "sales"],
+            "facets": {
+                "sectorid": [
+                    "ALL",
+                    "COM",
+                    "IND",
+                    "OTH",
+                    "RES",
+                    "TRA"
+                ],
+                "stateid": [
+                    "AK",
+                    "AL",
+                    "AR",
+                    "AZ",
+                    "CA",
+                    "CO",
+                    "CT",
+                    "DC",
+                    "DE",
+                    "ENC",
+                    "ESC",
+                    "FL",
+                    "GA",
+                    "HI",
+                    "IA",
+                    "ID",
+                    "IL",
+                    "IN",
+                    "KS",
+                    "KY",
+                    "LA",
+                    "MA",
+                    "MAT",
+                    "MD",
+                    "ME",
+                    "MI",
+                    "MN",
+                    "MO",
+                    "MS",
+                    "MT",
+                    "MTN",
+                    "NC",
+                    "ND",
+                    "NE",
+                    "NEW",
+                    "NH",
+                    "NJ",
+                    "NM",
+                    "NV",
+                    "NY",
+                    "OH",
+                    "OK",
+                    "OR",
+                    "PA",
+                    "PACC",
+                    "PACN",
+                    "RI",
+                    "SAT",
+                    "SC",
+                    "SD",
+                    "TN",
+                    "TX",
+                    "US",
+                    "UT",
+                    "VA",
+                    "VT",
+                    "WA",
+                    "WI",
+                    "WNC",
+                    "WSC",
+                    "WV",
+                    "WY"
+                ]
+            },
+            "start": null,
+            "end": null,
+            "sort": [
+                {
+                    "column": "customers",
+                    "direction": "asc"
+                },
+                {
+                    "column": "period",
+                    "direction": "asc"
+                },
+                {
+                    "column": "price",
+                    "direction": "asc"
+                },
+                {
+                    "column": "revenue",
+                    "direction": "asc"
+                },
+                {
+                    "column": "sales",
+                    "direction": "asc"
+                },
+                {
+                    "column": "sectorid",
+                    "direction": "asc"
+                },
+                {
+                    "column": "stateid",
+                    "direction": "asc"
+                }
+            ]
+        },
+        "offset": 0,
+        "length": 5000
+    },
+    "ingest": {
+        "target": "Xata",
+        "table_name": "electricity_sales_to_customer_raw"
+    },
+    "rules": {
+        "symbol_replacement": {
+            "replacements": [
+                {
+                    "symbols": ["-", "%", "*"],
+                    "replace_with": "_"
+                }
+            ]
+        },
+        "null_value_replacement":{
+            "replace_with": 0
+        }
+    }
+}

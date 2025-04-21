@@ -1,0 +1,47 @@
+{
+    "providers": {    
+        "provider": "EIA",
+        "base_url": "https://api.eia.gov/v2/electricity/rto/fuel-type-data/data/",
+        "params": {
+            "frequency": "hourly",
+            "data": ["value"],
+            "facets": {
+                "fueltype": ["COL", "NG", "NUC", "OIL", "OTH", "SUN", "UNK", "WAT", "WND"],
+                "respondent": ["AEC", "AECI", "AVA", "AVRN", "AZPS", "BANC", "BPAT", "CAL", "CAR", "CENT", "CHPD", "CISO",
+                            "CPLE", "CPLW", "DEAA", "DOPD", "DUK", "EEI", "EPE", "ERCO", "FLA", "FMPP", "FPC", "FPL",
+                            "GCPD", "GLHB", "GRID", "GRIF", "GVL", "GWA", "HGMA", "HST", "IID", "IPCO", "ISNE", "JEA",
+                            "LDWP", "LGEE", "MIDA", "MIDW", "MISO", "NE", "NEVP", "NSB", "NW", "NWMT", "NY", "NYIS",
+                            "PACE", "PACW", "PGE", "PJM", "PNM", "PSCO", "PSEI", "SC", "SCEG", "SCL", "SE", "SEC",
+                            "SEPA", "SOCO", "SPA", "SRP", "SW", "SWPP", "TAL", "TEC", "TEN", "TEPC", "TEX", "TIDC",
+                            "TPWR", "TVA", "US48", "WACM", "WALC", "WAUW", "WWA", "YAD"]
+            },
+            "start": null,
+            "end": null,
+            "sort": [
+                {"column": "fueltype", "direction": "desc"},
+                {"column": "respondent", "direction": "asc"},
+                {"column": "period", "direction": "asc"},
+                {"column": "value", "direction": "asc"}
+            ]
+        },
+        "offset": 0,
+        "length": 5000
+    },
+    "ingest": {
+        "target": "Xata",
+        "table_name": "test"
+    },
+    "rules": {
+        "symbol_replacement": {
+            "replacements": [
+                {
+                    "symbols": ["-"],
+                    "replace_with": "_"
+                }
+            ]
+        },
+        "null_value_replacement": {
+            "replace_with": 0
+        }
+    }
+}
